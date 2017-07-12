@@ -1,0 +1,1 @@
+add_library(maxflow maxflow.cpp graph.cpp)

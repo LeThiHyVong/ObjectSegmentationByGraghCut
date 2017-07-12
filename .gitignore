@@ -1,0 +1,10 @@
+build/**
+cmake-build-debug/**
+**/CMakeFiles/
+**/*.a
+**/*.cmake
+target_pch/
+CMakeCache.txt
+**/Makefile
+.vscode/
+.idea/

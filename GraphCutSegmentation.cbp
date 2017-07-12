@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="GraphCutSegmentation"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\..\;CMake Files\..\..\..\..\usr\;CMake Files\..\..\..\..\usr\share\;CMake Files\..\..\..\..\usr\share\opencv\;CMake Files\max_flow\;CMake Files\graphcut\;CMake Files\lazy\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/nvkhoi/CLionProjects/GraphCutSegmentation"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/nvkhoi/CLionProjects/GraphCutSegmentation/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/nvkhoi/CLionProjects/GraphCutSegmentation/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/nvkhoi/CLionProjects/GraphCutSegmentation/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/nvkhoi/CLionProjects/GraphCutSegmentation/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/nvkhoi/CLionProjects/GraphCutSegmentation"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/nvkhoi/CLionProjects/GraphCutSegmentation/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/nvkhoi/CLionProjects/GraphCutSegmentation/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/nvkhoi/CLionProjects/GraphCutSegmentation/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/nvkhoi/CLionProjects/GraphCutSegmentation/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/nvkhoi/CLionProjects/GraphCutSegmentation"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/nvkhoi/CLionProjects/GraphCutSegmentation/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/nvkhoi/CLionProjects/GraphCutSegmentation/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/nvkhoi/CLionProjects/GraphCutSegmentation/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/nvkhoi/CLionProjects/GraphCutSegmentation/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="target">
+				<Option output="/home/nvkhoi/CLionProjects/GraphCutSegmentation/libtarget.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/nvkhoi/CLionProjects/GraphCutSegmentation"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/opencv"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/../../../../include/c++/7.1.1"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/../../../../include/c++/7.1.1/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/../../../../include/c++/7.1.1/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/nvkhoi/CLionProjects/GraphCutSegmentation/Makefile&quot;  VERBOSE=1 target"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/nvkhoi/CLionProjects/GraphCutSegmentation/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/nvkhoi/CLionProjects/GraphCutSegmentation/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/nvkhoi/CLionProjects/GraphCutSegmentation/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="target/fast">
+				<Option output="/home/nvkhoi/CLionProjects/GraphCutSegmentation/libtarget.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/nvkhoi/CLionProjects/GraphCutSegmentation"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/opencv"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/../../../../include/c++/7.1.1"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/../../../../include/c++/7.1.1/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/../../../../include/c++/7.1.1/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/nvkhoi/CLionProjects/GraphCutSegmentation/Makefile&quot;  VERBOSE=1 target/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/nvkhoi/CLionProjects/GraphCutSegmentation/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/nvkhoi/CLionProjects/GraphCutSegmentation/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/nvkhoi/CLionProjects/GraphCutSegmentation/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="GraphCutSegmentation">
+				<Option output="/home/nvkhoi/CLionProjects/GraphCutSegmentation/GraphCutSegmentation" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/nvkhoi/CLionProjects/GraphCutSegmentation"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/opencv"/>
+					<Add directory="/home/nvkhoi/CLionProjects/GraphCutSegmentation/graphcut/../max_flow"/>
+					<Add directory="/home/nvkhoi/CLionProjects/GraphCutSegmentation/lazy/../max_flow"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/../../../../include/c++/7.1.1"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/../../../../include/c++/7.1.1/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/../../../../include/c++/7.1.1/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/nvkhoi/CLionProjects/GraphCutSegmentation/Makefile&quot;  VERBOSE=1 GraphCutSegmentation"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/nvkhoi/CLionProjects/GraphCutSegmentation/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/nvkhoi/CLionProjects/GraphCutSegmentation/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/nvkhoi/CLionProjects/GraphCutSegmentation/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="GraphCutSegmentation/fast">
+				<Option output="/home/nvkhoi/CLionProjects/GraphCutSegmentation/GraphCutSegmentation" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/nvkhoi/CLionProjects/GraphCutSegmentation"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/opencv"/>
+					<Add directory="/home/nvkhoi/CLionProjects/GraphCutSegmentation/graphcut/../max_flow"/>
+					<Add directory="/home/nvkhoi/CLionProjects/GraphCutSegmentation/lazy/../max_flow"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/../../../../include/c++/7.1.1"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/../../../../include/c++/7.1.1/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/../../../../include/c++/7.1.1/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/nvkhoi/CLionProjects/GraphCutSegmentation/Makefile&quot;  VERBOSE=1 GraphCutSegmentation/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/nvkhoi/CLionProjects/GraphCutSegmentation/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/nvkhoi/CLionProjects/GraphCutSegmentation/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/nvkhoi/CLionProjects/GraphCutSegmentation/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="maxflow">
+				<Option output="/home/nvkhoi/CLionProjects/GraphCutSegmentation/max_flow/libmaxflow.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/nvkhoi/CLionProjects/GraphCutSegmentation/max_flow"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/../../../../include/c++/7.1.1"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/../../../../include/c++/7.1.1/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/../../../../include/c++/7.1.1/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/nvkhoi/CLionProjects/GraphCutSegmentation/max_flow/Makefile&quot;  VERBOSE=1 maxflow"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/nvkhoi/CLionProjects/GraphCutSegmentation/max_flow/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/nvkhoi/CLionProjects/GraphCutSegmentation/max_flow/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/nvkhoi/CLionProjects/GraphCutSegmentation/max_flow/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="maxflow/fast">
+				<Option output="/home/nvkhoi/CLionProjects/GraphCutSegmentation/max_flow/libmaxflow.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/nvkhoi/CLionProjects/GraphCutSegmentation/max_flow"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/../../../../include/c++/7.1.1"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/../../../../include/c++/7.1.1/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/../../../../include/c++/7.1.1/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/nvkhoi/CLionProjects/GraphCutSegmentation/max_flow/Makefile&quot;  VERBOSE=1 maxflow/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/nvkhoi/CLionProjects/GraphCutSegmentation/max_flow/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/nvkhoi/CLionProjects/GraphCutSegmentation/max_flow/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/nvkhoi/CLionProjects/GraphCutSegmentation/max_flow/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="graphcut">
+				<Option output="/home/nvkhoi/CLionProjects/GraphCutSegmentation/graphcut/libgraphcut.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/nvkhoi/CLionProjects/GraphCutSegmentation/graphcut"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/nvkhoi/CLionProjects/GraphCutSegmentation/graphcut/../max_flow"/>
+					<Add directory="/home/nvkhoi/CLionProjects/GraphCutSegmentation/lazy/../max_flow"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/../../../../include/c++/7.1.1"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/../../../../include/c++/7.1.1/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/../../../../include/c++/7.1.1/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/nvkhoi/CLionProjects/GraphCutSegmentation/graphcut/Makefile&quot;  VERBOSE=1 graphcut"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/nvkhoi/CLionProjects/GraphCutSegmentation/graphcut/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/nvkhoi/CLionProjects/GraphCutSegmentation/graphcut/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/nvkhoi/CLionProjects/GraphCutSegmentation/graphcut/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="graphcut/fast">
+				<Option output="/home/nvkhoi/CLionProjects/GraphCutSegmentation/graphcut/libgraphcut.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/nvkhoi/CLionProjects/GraphCutSegmentation/graphcut"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/nvkhoi/CLionProjects/GraphCutSegmentation/graphcut/../max_flow"/>
+					<Add directory="/home/nvkhoi/CLionProjects/GraphCutSegmentation/lazy/../max_flow"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/../../../../include/c++/7.1.1"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/../../../../include/c++/7.1.1/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/../../../../include/c++/7.1.1/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/nvkhoi/CLionProjects/GraphCutSegmentation/graphcut/Makefile&quot;  VERBOSE=1 graphcut/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/nvkhoi/CLionProjects/GraphCutSegmentation/graphcut/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/nvkhoi/CLionProjects/GraphCutSegmentation/graphcut/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/nvkhoi/CLionProjects/GraphCutSegmentation/graphcut/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="lazy">
+				<Option output="/home/nvkhoi/CLionProjects/GraphCutSegmentation/lazy/liblazy.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/nvkhoi/CLionProjects/GraphCutSegmentation/lazy"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/../../../../include/c++/7.1.1"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/../../../../include/c++/7.1.1/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/../../../../include/c++/7.1.1/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/nvkhoi/CLionProjects/GraphCutSegmentation/lazy/Makefile&quot;  VERBOSE=1 lazy"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/nvkhoi/CLionProjects/GraphCutSegmentation/lazy/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/nvkhoi/CLionProjects/GraphCutSegmentation/lazy/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/nvkhoi/CLionProjects/GraphCutSegmentation/lazy/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="lazy/fast">
+				<Option output="/home/nvkhoi/CLionProjects/GraphCutSegmentation/lazy/liblazy.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/nvkhoi/CLionProjects/GraphCutSegmentation/lazy"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/../../../../include/c++/7.1.1"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/../../../../include/c++/7.1.1/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/../../../../include/c++/7.1.1/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/nvkhoi/CLionProjects/GraphCutSegmentation/lazy/Makefile&quot;  VERBOSE=1 lazy/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/nvkhoi/CLionProjects/GraphCutSegmentation/lazy/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/nvkhoi/CLionProjects/GraphCutSegmentation/lazy/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/nvkhoi/CLionProjects/GraphCutSegmentation/lazy/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/nvkhoi/CLionProjects/GraphCutSegmentation/graphcut/GraphCutSegmentation.cpp">
+			<Option target="graphcut"/>
+		</Unit>
+		<Unit filename="/home/nvkhoi/CLionProjects/GraphCutSegmentation/graphcut/GraphCutSegmentation.h">
+			<Option target="graphcut"/>
+		</Unit>
+		<Unit filename="/home/nvkhoi/CLionProjects/GraphCutSegmentation/lazy/LazySnapping.cpp">
+			<Option target="lazy"/>
+		</Unit>
+		<Unit filename="/home/nvkhoi/CLionProjects/GraphCutSegmentation/lazy/LazySnapping.h">
+			<Option target="lazy"/>
+		</Unit>
+		<Unit filename="/home/nvkhoi/CLionProjects/GraphCutSegmentation/lazy/SeedsRevised.cpp">
+			<Option target="lazy"/>
+		</Unit>
+		<Unit filename="/home/nvkhoi/CLionProjects/GraphCutSegmentation/lazy/SeedsRevised.h">
+			<Option target="lazy"/>
+		</Unit>
+		<Unit filename="/home/nvkhoi/CLionProjects/GraphCutSegmentation/lazy/Tools.cpp">
+			<Option target="lazy"/>
+		</Unit>
+		<Unit filename="/home/nvkhoi/CLionProjects/GraphCutSegmentation/lazy/Tools.h">
+			<Option target="lazy"/>
+		</Unit>
+		<Unit filename="/home/nvkhoi/CLionProjects/GraphCutSegmentation/lazy/watershedLabel.cpp">
+			<Option target="lazy"/>
+		</Unit>
+		<Unit filename="/home/nvkhoi/CLionProjects/GraphCutSegmentation/lazy/watershedLabel.h">
+			<Option target="lazy"/>
+		</Unit>
+		<Unit filename="/home/nvkhoi/CLionProjects/GraphCutSegmentation/main.cpp">
+			<Option target="GraphCutSegmentation"/>
+		</Unit>
+		<Unit filename="/home/nvkhoi/CLionProjects/GraphCutSegmentation/max_flow/graph.cpp">
+			<Option target="maxflow"/>
+		</Unit>
+		<Unit filename="/home/nvkhoi/CLionProjects/GraphCutSegmentation/max_flow/graph.h">
+			<Option target="maxflow"/>
+		</Unit>
+		<Unit filename="/home/nvkhoi/CLionProjects/GraphCutSegmentation/max_flow/maxflow.cpp">
+			<Option target="maxflow"/>
+		</Unit>
+		<Unit filename="/home/nvkhoi/CLionProjects/GraphCutSegmentation/stdc++.cpp">
+			<Option target="target"/>
+		</Unit>
+		<Unit filename="/home/nvkhoi/CLionProjects/GraphCutSegmentation/stdc++.h">
+			<Option target="target"/>
+		</Unit>
+		<Unit filename="/home/nvkhoi/CLionProjects/GraphCutSegmentation/target_pch/stdc++.h.gch/.c++.rule">
+			<Option target="target"/>
+		</Unit>
+		<Unit filename="/home/nvkhoi/CLionProjects/GraphCutSegmentation/target_pch/stdc++.h.rule">
+			<Option target="target"/>
+		</Unit>
+		<Unit filename="/home/nvkhoi/CLionProjects/GraphCutSegmentation/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/home/nvkhoi/CLionProjects/GraphCutSegmentation/PrecompiledHeader.cmake">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/home/nvkhoi/CLionProjects/GraphCutSegmentation/../../../../usr/share/opencv/OpenCVConfig-version.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\share\opencv\"/>
+		</Unit>
+		<Unit filename="/home/nvkhoi/CLionProjects/GraphCutSegmentation/../../../../usr/share/opencv/OpenCVConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\share\opencv\"/>
+		</Unit>
+		<Unit filename="/home/nvkhoi/CLionProjects/GraphCutSegmentation/../../../../usr/share/opencv/OpenCVModules.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\share\opencv\"/>
+		</Unit>
+		<Unit filename="/home/nvkhoi/CLionProjects/GraphCutSegmentation/../../../../usr/share/opencv/OpenCVModules-release.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\share\opencv\"/>
+		</Unit>
+		<Unit filename="/home/nvkhoi/CLionProjects/GraphCutSegmentation/max_flow/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\max_flow\"/>
+		</Unit>
+		<Unit filename="/home/nvkhoi/CLionProjects/GraphCutSegmentation/graphcut/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\graphcut\"/>
+		</Unit>
+		<Unit filename="/home/nvkhoi/CLionProjects/GraphCutSegmentation/lazy/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\lazy\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
