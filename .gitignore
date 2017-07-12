@@ -3,6 +3,7 @@ cmake-build-debug/**
 **/CMakeFiles/
 **/*.a
 **/*.cmake
+!/PrecompiledHeader.cmake
 target_pch/
 CMakeCache.txt
 **/Makefile
