@@ -172,19 +172,19 @@ float GraphCutSegmentation::calcNWeight(const cv::Point &pix1, const cv::Point &
 		intensityDiff += (tmpDiff * tmpDiff / (2 * sigmaSqr[i]));
 	}
 	auto dist = pix2 - pix1;
-	return exp(-intensityDiff) / std::sqrt(dist.x * dist.x + dist.y * dist.y);
+	return std::exp(-intensityDiff) / std::sqrt(dist.x * dist.x + dist.y * dist.y);
 }
 
 float GraphCutSegmentation::Pr_bkg(const cv::Point &pix)
 {
 
-	return -log(bkgRelativeHistogram[cluster_idx.at<int>(convertPixelToNode(pix), 0)]);
+	return -std::log(bkgRelativeHistogram[cluster_idx.at<int>(convertPixelToNode(pix), 0)]);
 }
 
 float GraphCutSegmentation::Pr_obj(const cv::Point &pix)
 {
 
-	return -log(objRelativeHistogram[cluster_idx.at<int>(convertPixelToNode(pix), 0)]);
+	return -std::log(objRelativeHistogram[cluster_idx.at<int>(convertPixelToNode(pix), 0)]);
 }
 
 void GraphCutSegmentation::cutGraph(cv::Mat &outputMask)

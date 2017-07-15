@@ -6,6 +6,8 @@
 
 /**
  * @todo Use Boost implementation of Boykov maxflow algorithm, and compare to push-relabel or edmond-karp algorithm
+ * @todo Refactor 
+ * @todo Doxygen comment style
  * @reference http://www.boost.org/doc/libs/1_60_0/libs/graph/doc/boykov_kolmogorov_max_flow.html
  */
 class GraphCutSegmentation
@@ -13,6 +15,7 @@ class GraphCutSegmentation
 	typedef Graph<double, double, double> GraphType;
 
   public:
+	//! The enumeration type represent state of each pixel
 	enum PixelType
 	{
 		BACKGROUND = -1,
@@ -20,38 +23,83 @@ class GraphCutSegmentation
 		OBJECT = 1
 	};
 
+	//! The default no parameter constructor
 	GraphCutSegmentation();
 
+	//! Default destructor
 	~GraphCutSegmentation();
 
-	void setNCluster(int);
+	//! Set the number of color clusters
+	/**
+	 * \param[in] _cluster The custom number of cluster
+	*/
+	void setNCluster(int _cluster);
 
-	void setNDimension(int);
+	//! Set the number of color dimension
+	/**
+	 * \param[in] _dim The custom number of color dimensions, usually it the number of image channels
+	*/
+	void setNDimension(int _dim);
 
+	//! Calculate the image's color variance for each dimension
+	/**
+	 * \param[in] origImg the original image to process
+	*/
 	void calcColorVariance(const cv::Mat &origImg);
 
-	void setRegionBoundaryRelation(float);
+	//! Set the relationship coefficience betwwen regional and boundary term
+	/**
+	 * \param[in] _lambda a non-negative decimal number
+	*/
+	void setRegionBoundaryRelation(float _lambda);
 
+	//! Initialize component for processing
+	/**
+	 * \param[in] origImg the image need separating
+	 * \param[in] seedMask the sample points provided by user
+	*/
 	void initComponent(const cv::Mat &origImg, const cv::Mat &seedMask);
 
+	//! Build the directed graph (flow) 
+	/**
+	 * \param[in] origImg the image need separating
+	 * \param[in] seedMask the sample points provided by user
+	*/
 	void buildGraph(const cv::Mat &origImg, const cv::Mat &seedMask);
 
+	//! Find the minimum cut to find optimal segmentation 
+	/**
+	 * \param[out] outMask output mask represent the segmentation result
+	*/
 	void cutGraph(cv::Mat &outMask);
 
+	//! Whole segmentation process, just a combination of #initComponent, #buildGraph and #cutGraph 
+	/**
+	 * \param[in] origImg the image need separating
+	 * \param[in] seedMask the sample points provided by user
+	 * \param[out] outMask output mask represent the segmentation result
+	*/
 	void segment(const cv::Mat &img, const cv::Mat &seedMask, cv::Mat &outputMask);
 
+	//! @todo incremental edit
 	void updateSeeds(const std::vector<cv::Point> &newSeeds, PixelType pixType, cv::Mat &outputMask);
 
+	//! create initial state
 	void createDefault();
+
+	//! collect memory garbage
 	void cleanGarbage();
 
   private:
+	//! Relational coordinate of 8-neighbor relationship
 	const std::vector<cv::Point> neighbor8{
 		{-1, -1}, {-1, 0}, {-1, 1}, {0, 1}, {1, 1}, {1, 0}, {1, -1}, {0, -1}};
 
+	//! the flow
 	std::unique_ptr<GraphType> g;
-
-	int imgWidth, imgHeight;
+	
+	int imgWidth, 
+		imgHeight;
 
 	float K;
 
@@ -68,8 +116,10 @@ class GraphCutSegmentation
 
 	void initParam();
 
+	// From terminal to internal
 	float calcTWeight(const cv::Point &pix, int pixType, bool toSource = true);
 
+	// Between internal
 	float calcNWeight(const cv::Point &pix1, const cv::Point &pix2, const cv::Mat &origImg); //B_pq
 
 	int convertPixelToNode(const cv::Point &);
