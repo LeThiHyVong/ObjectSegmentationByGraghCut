@@ -191,8 +191,8 @@ void GraphCutSegmentation::cutGraph(cv::Mat &outputMask)
 {
 
 	outputMask.create(cv::Size(imgWidth, imgHeight), CV_8U);
-	float flow = 0.0;
-	flow = g->maxflow(!runFirstTime, NULL);
+	// float flow = 0.0;
+	// flow = g->maxflow(!runFirstTime, NULL);
 	runFirstTime = false;
 
 	int node = 0;

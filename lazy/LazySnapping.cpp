@@ -303,7 +303,7 @@ void LazySnapping::initGraph()
 
 	graph = new GraphType(n, 8 * n);
 
-	double e1[2], e2[2];
+	double e1[2];
 
 	graph->add_node(n);
 
@@ -340,7 +340,7 @@ void LazySnapping::runMaxFlow()
 {
 	initSeeds();
 	initGraph();
-	float flowValue = graph->maxflow();
+	// float flowValue = graph->maxflow();
 	getLabellingValue();
 
 	setUpdateF(false);
