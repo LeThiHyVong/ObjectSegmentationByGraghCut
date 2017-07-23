@@ -3,24 +3,18 @@
 void GraphCutSegmentation::calcColorVariance(const cv::Mat &origImg)
 {
 	cv::Scalar tmp = cv::mean(origImg);
-	cv::Vec3f avgColor{(float)tmp[0], (float)tmp[1], (float)tmp[2]};
-	sigmaSqr = {0.0f, 0.0f, 0.0f};
-	for (int r = 0; r < origImg.rows; r++)
-		for (int c = 0; c < origImg.cols; c++)
-		{
-			cv::Vec3f tmpPix = origImg.at<cv::Vec3b>(r, c);
-			auto diff = tmpPix - avgColor;
-			sigmaSqr += cv::Vec3f{diff[0] * diff[0],
-								  diff[1] * diff[1],
-								  diff[2] * diff[2]};
-		}
-	int numPix = origImg.rows * origImg.cols;
-	sigmaSqr /= numPix;
+	cv::Vec3d avgColor{tmp[0], tmp[1], tmp[2]};
+	iterateImg(origImg, FFL([&](int r, int c){
+		cv::Vec3d tmpPix = origImg.at<cv::Vec3b>(r, c);
+		auto diff = tmpPix - avgColor;
+		sigmaSqr += (diff * diff);
+	}));
+
+	sigmaSqr /= int(origImg.total());
 }
 
 void GraphCutSegmentation::initComponent(const cv::Mat &origImg, const cv::Mat &seedMask)
 {
-
 	calcColorVariance(origImg);
 	cv::Mat data_points;
 	origImg.convertTo(data_points, CV_32FC3);
@@ -33,118 +27,91 @@ void GraphCutSegmentation::initComponent(const cv::Mat &origImg, const cv::Mat &
 			   1,
 			   cv::KMEANS_RANDOM_CENTERS);
 
-	std::vector<int> obj_hist(nCluster + 1), bkg_hist(nCluster + 1);
+	std::vector<int> obj_hist(nCluster + 1u), bkg_hist(nCluster + 1u);
 	bkgRelativeHistogram.resize(nCluster);
 	objRelativeHistogram.resize(nCluster);
 
-	for (int i = 0; i < imgHeight; i++)
-	{
-		for (int j = 0; j < imgWidth; j++)
+	iterateImg(origImg, FFL([&](int i, int j){
+		auto which_c = cluster_idx.at<int>(i * imgWidth + j, 0);
+
+		switch (seedMask.at<char>(i, j))
 		{
+		case OBJECT:
+			obj_hist[which_c]++;
+			obj_hist[nCluster]++;
+			break;
 
-			auto which_c = cluster_idx.at<int>(i * imgWidth + j, 0);
+		case BACKGROUND:
+			bkg_hist[which_c]++;
+			bkg_hist[nCluster]++;
+			break;
 
-			switch (seedMask.at<char>(i, j))
-			{
-
-			case OBJECT:
-				obj_hist[which_c]++;
-				obj_hist[nCluster]++;
-				break;
-
-			case BACKGROUND:
-				bkg_hist[which_c]++;
-				bkg_hist[nCluster]++;
-				break;
-
-			default:
-				break;
-			}
+		default:
+			break;
 		}
-	}
-
-	for (int i = 0; i < nCluster; i++)
+	}));
+	for (auto i = 0u; i < nCluster; i++)
 	{
-
-		bkgRelativeHistogram[i] = 1.0f * bkg_hist[i] / bkg_hist[nCluster];
-		objRelativeHistogram[i] = 1.0f * obj_hist[i] / obj_hist[nCluster];
+		bkgRelativeHistogram[i] = 1. * bkg_hist[i] / bkg_hist[nCluster];
+		objRelativeHistogram[i] = 1. * obj_hist[i] / obj_hist[nCluster];
 	}
 }
 
 void GraphCutSegmentation::buildGraph(const cv::Mat &origImg, const cv::Mat &seedMask)
 {
-
 	g->add_node(imgWidth * imgHeight);
-
-	cv::Rect imgRect(cv::Point(), cv::Size(imgWidth, imgHeight));
-	K = 0.0f;
+	cv::Rect imgRect{cv::Point(), cv::Size(imgWidth, imgHeight)};
 	std::vector<bool> isAdded(imgWidth * imgHeight, false);
 
-	for (int i = 0; i < imgHeight; i++)
-	{
+	iterateImg(origImg, FFL([&](int i, int j){
+		auto node = i * imgWidth + j;
+		cv::Point pix{j, i};
 
-		for (int j = 0; j < imgWidth; j++)
+		auto tmpSumNLink = 0.0;
+
+		// Relation to neighbors
+		for (auto &k : neighbor)
 		{
+			cv::Point neighborPix = pix + k;
 
-			int node = i * imgWidth + j;
-			cv::Point pix(j, i);
-
-			auto tmpSumNLink = 0.0f;
-
-			// Relation to neighbors
-			for (auto &k : neighbor8)
+			if (imgRect.contains(neighborPix))
 			{
+				auto neighborNode = convertPixelToNode(neighborPix);
+				auto tmpNWeight = calcNWeight(pix, neighborPix, origImg);
+				tmpSumNLink += 2 * tmpNWeight;
 
-				cv::Point neighborPix = pix + k;
-
-				if (imgRect.contains(neighborPix))
+				if (!isAdded[neighborNode])
 				{
-
-					int neighborNode = convertPixelToNode(neighborPix);
-					auto tmpNWeight = calcNWeight(pix, neighborPix, origImg);
-					tmpSumNLink += 2 * tmpNWeight;
-
-					if (!isAdded[neighborNode])
-					{
-						g->add_edge(node, neighborNode,
-									tmpNWeight,
-									tmpNWeight);
-					}
+					g->add_edge(node, neighborNode,
+								tmpNWeight,
+								tmpNWeight);
 				}
 			}
-			isAdded[node] = true;
-			K = std::max(tmpSumNLink, K);
 		}
-	}
+		isAdded[node] = true;
+		K = std::max(tmpSumNLink, K);
+	}));		
 
-	K += 1.0f;
+	K += 1.0;
 
-	for (int i = 0; i < imgHeight; i++)
-	{
+	iterateImg(origImg, FFL([&](int i, int j){
+		auto node = i * imgWidth + j;
+		cv::Point pix{j, i};
 
-		for (int j = 0; j < imgWidth; j++)
-		{
-
-			int node = i * imgWidth + j;
-			cv::Point pix(j, i);
-
-			// Relation to source and sink
-			g->add_tweights(
-				node,
-				calcTWeight(pix, seedMask.at<char>(pix)),
-				calcTWeight(pix, seedMask.at<char>(pix), false));
-		}
-	}
+		// Relation to source and sink
+		g->add_tweights(
+			node,
+			calcTWeight(pix, seedMask.at<char>(pix)),
+			calcTWeight(pix, seedMask.at<char>(pix), false));
+	}));
 }
 
-float GraphCutSegmentation::calcTWeight(const cv::Point &pix, int pixType, bool toSource)
+double GraphCutSegmentation::calcTWeight(const cv::Point &pix, int pixType, bool toSource)
 {
-
-	float retVal = 0.0f;
+	double retVal = 0.0;
 
 	switch (pixType)
 	{
-
 	case OBJECT:
 		retVal = (toSource ? K : 0);
 		break;
@@ -161,56 +128,53 @@ float GraphCutSegmentation::calcTWeight(const cv::Point &pix, int pixType, bool 
 	return retVal;
 }
 
-float GraphCutSegmentation::calcNWeight(const cv::Point &pix1, const cv::Point &pix2, const cv::Mat &origImg)
+double GraphCutSegmentation::calcNWeight(const cv::Point &pix1, const cv::Point &pix2, const cv::Mat &origImg)
 {
 	auto r1 = origImg.at<cv::Vec3b>(pix1),
 		 r2 = origImg.at<cv::Vec3b>(pix2);
-	float intensityDiff = 0.0f;
+	double intensityDiff = 0.0;
 	for (int i = 0; i < dim; i++)
 	{
-		float tmpDiff = r1[i] * 1.0f - r2[i];
+		double tmpDiff = r1[i] * 1. - r2[i];
 		intensityDiff += (tmpDiff * tmpDiff / (2 * sigmaSqr[i]));
 	}
 	auto dist = pix2 - pix1;
 	return std::exp(-intensityDiff) / std::sqrt(dist.x * dist.x + dist.y * dist.y);
 }
 
-float GraphCutSegmentation::Pr_bkg(const cv::Point &pix)
+double GraphCutSegmentation::Pr_bkg(const cv::Point &pix)
 {
-
 	return -std::log(bkgRelativeHistogram[cluster_idx.at<int>(convertPixelToNode(pix), 0)]);
 }
 
-float GraphCutSegmentation::Pr_obj(const cv::Point &pix)
+double GraphCutSegmentation::Pr_obj(const cv::Point &pix)
 {
-
 	return -std::log(objRelativeHistogram[cluster_idx.at<int>(convertPixelToNode(pix), 0)]);
 }
 
 void GraphCutSegmentation::cutGraph(cv::Mat &outputMask)
 {
-
 	outputMask.create(cv::Size(imgWidth, imgHeight), CV_8U);
-	// float flow = 0.0;
+	// double flow = 0.0;
 	// flow = g->maxflow(!runFirstTime, NULL);
-	runFirstTime = false;
+	// runFirstTime = false;
 
 	int node = 0;
 
 	int numBkg = 0, numObj = 0;
-	for (int i = 0; i < imgHeight; i++)
+	for (auto i = 0u; i < imgHeight; i++)
 	{
-		for (int j = 0; j < imgWidth; j++)
+		for (auto j = 0u; j < imgWidth; j++)
 		{
 
 			if (g->what_segment(node) == GraphType::SOURCE)
 			{
-				outputMask.at<uchar>(i, j) = 255;
+				outputMask.at<uchar>(i, j) = ~uint8_t(0u);
 				numObj++;
 			}
 			else if (g->what_segment(node) == GraphType::SINK)
 			{
-				outputMask.at<uchar>(i, j) = 0;
+				outputMask.at<uchar>(i, j) = 0u;
 				numBkg++;
 			}
 			node++;
@@ -220,7 +184,6 @@ void GraphCutSegmentation::cutGraph(cv::Mat &outputMask)
 
 void GraphCutSegmentation::segment(const cv::Mat &img, const cv::Mat &seedMask, cv::Mat &outputMask)
 {
-
 	g.reset(new GraphType(getNumNodes(img), getNumEdges(img)));
 	imgWidth = img.cols;
 	imgHeight = img.rows;

@@ -23,6 +23,7 @@
 #include <utility>
 #include <cstdint>
 #include <cstdlib>
+#include <functional>
 
 #include <thread>
 #include <mutex>
@@ -35,5 +36,24 @@
 
 
 // User-defined
+// dedicated/retrospective cast
+template<typename T>
+struct memfun_type
+{
+    using type = void;
+};
+
+template<typename Ret, typename Class, typename... Args>
+struct memfun_type<Ret(Class::*)(Args...) const>
+{
+    using type = std::function<Ret(Args...)>;
+};
+
+template<typename F>
+typename memfun_type<decltype(&F::operator())>::type
+FFL(F const &func)
+{ // Function from lambda !
+    return func;
+}
 
 #endif //GRAPHCUTSEGMENTATION_STDC_H_H

@@ -10,3 +10,6 @@ CMakeCache.txt
 .vscode/
 .idea/
 doc/
+GPATH
+GRTAGS
+GTAGS
