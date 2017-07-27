@@ -1,24 +1,23 @@
 #include "GraphCutSegmentation.h"
 
-void GraphCutSegmentation::calcColorVariance(const cv::Mat &origImg)
+void GraphCutSegmentation::calcColorVariance(const cv::Mat& origImg)
 {
 	cv::Scalar tmp = cv::mean(origImg);
 	cv::Vec3d avgColor{tmp[0], tmp[1], tmp[2]};
 	iterateImg(origImg, FFL([&](int r, int c){
-		cv::Vec3d tmpPix = origImg.at<cv::Vec3b>(r, c);
-		auto diff = tmpPix - avgColor;
+		auto diff = decltype(avgColor)(origImg.at<cv::Vec3b>(r, c)) - avgColor;
 		sigmaSqr += (diff * diff);
 	}));
 
 	sigmaSqr /= int(origImg.total());
 }
 
-void GraphCutSegmentation::initComponent(const cv::Mat &origImg, const cv::Mat &seedMask)
+void GraphCutSegmentation::initComponent(const cv::Mat& origImg, const cv::Mat& seedMask)
 {
 	calcColorVariance(origImg);
 	cv::Mat data_points;
 	origImg.convertTo(data_points, CV_32FC3);
-	data_points = data_points.reshape(0, origImg.rows * origImg.cols);
+	data_points = data_points.reshape(0, origImg.total());
 
 	cv::kmeans(data_points,
 			   nCluster,
@@ -57,11 +56,11 @@ void GraphCutSegmentation::initComponent(const cv::Mat &origImg, const cv::Mat &
 	}
 }
 
-void GraphCutSegmentation::buildGraph(const cv::Mat &origImg, const cv::Mat &seedMask)
+void GraphCutSegmentation::buildGraph(const cv::Mat& origImg, const cv::Mat& seedMask)
 {
-	g->add_node(imgWidth * imgHeight);
-	cv::Rect imgRect{cv::Point(), cv::Size(imgWidth, imgHeight)};
-	std::vector<bool> isAdded(imgWidth * imgHeight, false);
+	g->add_node(origImg.total());
+	cv::Rect imgRect{cv::Point(), origImg.size()};
+	std::vector<bool> isAdded(origImg.total(), false);
 
 	iterateImg(origImg, FFL([&](int i, int j){
 		auto node = i * imgWidth + j;
@@ -70,7 +69,7 @@ void GraphCutSegmentation::buildGraph(const cv::Mat &origImg, const cv::Mat &see
 		auto tmpSumNLink = 0.0;
 
 		// Relation to neighbors
-		for (auto &k : neighbor)
+		for (auto& k : neighbor)
 		{
 			cv::Point neighborPix = pix + k;
 
@@ -106,7 +105,7 @@ void GraphCutSegmentation::buildGraph(const cv::Mat &origImg, const cv::Mat &see
 	}));
 }
 
-double GraphCutSegmentation::calcTWeight(const cv::Point &pix, int pixType, bool toSource)
+double GraphCutSegmentation::calcTWeight(const cv::Point& pix, int pixType, bool toSource)
 {
 	double retVal = 0.0;
 
@@ -128,7 +127,7 @@ double GraphCutSegmentation::calcTWeight(const cv::Point &pix, int pixType, bool
 	return retVal;
 }
 
-double GraphCutSegmentation::calcNWeight(const cv::Point &pix1, const cv::Point &pix2, const cv::Mat &origImg)
+double GraphCutSegmentation::calcNWeight(const cv::Point& pix1, const cv::Point& pix2, const cv::Mat& origImg)
 {
 	auto r1 = origImg.at<cv::Vec3b>(pix1),
 		 r2 = origImg.at<cv::Vec3b>(pix2);
@@ -142,17 +141,17 @@ double GraphCutSegmentation::calcNWeight(const cv::Point &pix1, const cv::Point 
 	return std::exp(-intensityDiff) / std::sqrt(dist.x * dist.x + dist.y * dist.y);
 }
 
-double GraphCutSegmentation::Pr_bkg(const cv::Point &pix)
+double GraphCutSegmentation::Pr_bkg(const cv::Point& pix)
 {
 	return -std::log(bkgRelativeHistogram[cluster_idx.at<int>(convertPixelToNode(pix), 0)]);
 }
 
-double GraphCutSegmentation::Pr_obj(const cv::Point &pix)
+double GraphCutSegmentation::Pr_obj(const cv::Point& pix)
 {
 	return -std::log(objRelativeHistogram[cluster_idx.at<int>(convertPixelToNode(pix), 0)]);
 }
 
-void GraphCutSegmentation::cutGraph(cv::Mat &outputMask)
+void GraphCutSegmentation::cutGraph(cv::Mat& outputMask)
 {
 	outputMask.create(cv::Size(imgWidth, imgHeight), CV_8U);
 	// double flow = 0.0;
@@ -162,27 +161,23 @@ void GraphCutSegmentation::cutGraph(cv::Mat &outputMask)
 	int node = 0;
 
 	int numBkg = 0, numObj = 0;
-	for (auto i = 0u; i < imgHeight; i++)
-	{
-		for (auto j = 0u; j < imgWidth; j++)
-		{
 
-			if (g->what_segment(node) == GraphType::SOURCE)
-			{
-				outputMask.at<uchar>(i, j) = ~uint8_t(0u);
-				numObj++;
-			}
-			else if (g->what_segment(node) == GraphType::SINK)
-			{
-				outputMask.at<uchar>(i, j) = 0u;
-				numBkg++;
-			}
-			node++;
+	iterateImg(outputMask, FFL([&](int i, int j){
+		if (g->what_segment(node) == GraphType::SOURCE)
+		{
+			outputMask.at<uchar>(i, j) = ~uint8_t(0u);
+			numObj++;
 		}
-	}
+		else if (g->what_segment(node) == GraphType::SINK)
+		{
+			outputMask.at<uchar>(i, j) = 0u;
+			numBkg++;
+		}
+		node++;
+	}));
 }
 
-void GraphCutSegmentation::segment(const cv::Mat &img, const cv::Mat &seedMask, cv::Mat &outputMask)
+void GraphCutSegmentation::segment(const cv::Mat& img, const cv::Mat& seedMask, cv::Mat& outputMask)
 {
 	g.reset(new GraphType(getNumNodes(img), getNumEdges(img)));
 	imgWidth = img.cols;
@@ -195,9 +190,9 @@ void GraphCutSegmentation::segment(const cv::Mat &img, const cv::Mat &seedMask, 
 	cutGraph(outputMask);
 }
 
-void GraphCutSegmentation::updateSeeds(const std::vector<cv::Point> &newSeeds, PixelType pixType, cv::Mat &outputMask)
+void GraphCutSegmentation::updateSeeds(const std::vector<cv::Point>& newSeeds, PixelType pixType, cv::Mat& outputMask)
 {
-	for (const auto &p : newSeeds)
+	for (const auto& p : newSeeds)
 	{
 		g->mark_node(convertPixelToNode(p));
 		g->add_tweights(
@@ -210,7 +205,7 @@ void GraphCutSegmentation::updateSeeds(const std::vector<cv::Point> &newSeeds, P
 
 GraphCutSegmentation::GraphCutSegmentation()
 {
-	initParam();
+	createDefault();
 }
 
 GraphCutSegmentation::~GraphCutSegmentation()
