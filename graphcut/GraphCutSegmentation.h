@@ -135,12 +135,6 @@ class GraphCutSegmentation
 
 	double Pr_obj(const cv::Point &);
 
-	template<typename ...T>
-	void iterateImg(const cv::Mat& img, std::function<void(int, int, T& ...)> pixRelatedProc,T& ... args) {
-		for (int r = 0; r < img.rows; r++)
-			for (int c = 0; c < img.cols; c++)
-				pixRelatedProc(r, c, args...);
-	}
 };
 
 inline void GraphCutSegmentation::createDefault()
