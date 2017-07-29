@@ -135,14 +135,6 @@ class GraphCutSegmentation
 
 	double Pr_obj(const cv::Point &);
 
-	auto getNumNodes(const cv::Mat& img) {
-		return img.cols * img.rows;
-	}
-
-	auto getNumEdges(const cv::Mat& img) {
-		return img.cols * img.rows * (neighbor.size() + 2u);	
-	}
-
 	template<typename ...T>
 	void iterateImg(const cv::Mat& img, std::function<void(int, int, T& ...)> pixRelatedProc,T& ... args) {
 		for (int r = 0; r < img.rows; r++)

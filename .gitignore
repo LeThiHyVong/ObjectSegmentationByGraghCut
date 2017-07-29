@@ -13,3 +13,5 @@ doc/
 GPATH
 GRTAGS
 GTAGS
+result/
+dataset/

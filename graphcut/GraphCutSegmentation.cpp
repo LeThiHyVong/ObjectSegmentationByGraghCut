@@ -157,7 +157,7 @@ void GraphCutSegmentation::cutGraph(cv::Mat& outputMask)
 	// double flow = 0.0;
 	// flow = g->maxflow(!runFirstTime, NULL);
 	// runFirstTime = false;
-
+	g->maxflow();
 	int node = 0;
 
 	int numBkg = 0, numObj = 0;
@@ -179,7 +179,7 @@ void GraphCutSegmentation::cutGraph(cv::Mat& outputMask)
 
 void GraphCutSegmentation::segment(const cv::Mat& img, const cv::Mat& seedMask, cv::Mat& outputMask)
 {
-	g.reset(new GraphType(getNumNodes(img), getNumEdges(img)));
+	g.reset(new GraphType(img.total(), img.total() * (neighbor.size() + 2)));
 	imgWidth = img.cols;
 	imgHeight = img.rows;
 

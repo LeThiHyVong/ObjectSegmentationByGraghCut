@@ -12,7 +12,7 @@
 #define DST "result/"
 #define SRC "dataset/"
 
-std::ofstream ofs{"result\\time.csv"};
+std::ofstream ofs{DST"time.csv"};
 
 GraphCutSegmentation gc;
 
