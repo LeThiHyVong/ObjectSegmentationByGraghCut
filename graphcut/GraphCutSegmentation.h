@@ -10,6 +10,7 @@
  * @todo Doxygen comment style
  * @todo Iterate image for each pixel with custom callback process each pixel
  * @ref http://www.boost.org/doc/libs/1_60_0/libs/graph/doc/boykov_kolmogorov_max_flow.html
+ * @todo Opencv histogram
  */
 class GraphCutSegmentation
 {
@@ -93,13 +94,14 @@ class GraphCutSegmentation
 
   private:
 	//! Relational coordinate of 8-neighbor relationship
-	const std::vector<cv::Point> neighbor{
+	const std::vector<cv::Point> neighbor
+	{
 		{-1, -1},	{0, -1},	{1, -1},	
 		{-1,  0},	/*{0,0}*/	{1,  0},
 		{-1,  1},	{0,  1},	{1,  1}
 	};
 
-	//! the flow
+	// the flow
 	std::unique_ptr<GraphType> g;
 	
 	uint32_t imgWidth, imgHeight;
@@ -121,7 +123,7 @@ class GraphCutSegmentation
 	double calcTWeight(const cv::Point& pix, int pixType, bool toSource = true);
 
 	// Between internal
-	double calcNWeight(const cv::Point& pix1, const cv::Point& pix2, const cv::Mat& origImg); //B_pq
+	double calcNWeight(const cv::Point& pix1, const cv::Point& pix2, const cv::Mat& origImg); 
 
 	auto convertPixelToNode(const cv::Point& pix) {
 		return pix.y * imgWidth + pix.x;

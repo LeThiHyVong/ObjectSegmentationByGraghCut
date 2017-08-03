@@ -16,9 +16,10 @@ add_precompiled_header(target stdc++.h FORCEINCLUDE)
 
 add_subdirectory(max_flow)
 add_subdirectory(graphcut)
-add_subdirectory(lazy)
+# add_subdirectory(lazy)
 
 find_package(OpenCV REQUIRED)
 include_directories(${OpenCV_INCLUDE_DIRS})
 add_executable(GraphCutSegmentation ${SOURCE_FILES})
-target_link_libraries(GraphCutSegmentation ${OpenCV_LIBS} graphcut lazy maxflow)
+# target_link_libraries(GraphCutSegmentation ${OpenCV_LIBS} graphcut lazy maxflow)
+target_link_libraries(GraphCutSegmentation ${OpenCV_LIBS} graphcut maxflow)
