@@ -9,10 +9,10 @@ set(SOURCE_FILES main.cpp)
 
 project(GraphCutSegmentation)
 
-include(PrecompiledHeader.cmake)
+# include(PrecompiledHeader.cmake)
 
 add_library(target stdc++.h stdc++.cpp)
-add_precompiled_header(target stdc++.h FORCEINCLUDE)
+# add_precompiled_header(target stdc++.h FORCEINCLUDE)
 
 add_subdirectory(max_flow)
 add_subdirectory(graphcut)

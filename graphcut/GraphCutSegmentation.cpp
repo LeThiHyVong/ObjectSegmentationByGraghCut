@@ -7,8 +7,9 @@ void GraphCutSegmentation::calcColorVariance(const cv::Mat& origImg)
 
 	for (auto it = origImg.begin<cv::Vec3b>(); it != origImg.end<cv::Vec3b>(); it++) 
 	{
-		auto diff = cv::Vec3d(*it) - avgColor;
-		sigmaSqr += (diff * diff);
+		cv::Vec3d diff = cv::Vec3d(*it) - avgColor, diffSqr;
+		cv::pow(diff, 2, diffSqr);
+		sigmaSqr += diffSqr;
 	}
 	sigmaSqr /= int(origImg.total());
 }
@@ -161,7 +162,7 @@ void GraphCutSegmentation::cutGraph(cv::Mat& outputMask)
 	// double flow = 0.0;
 	// flow = g->maxflow(!runFirstTime, NULL);
 	// runFirstTime = false;
-	g->maxflow();
+	std::cout << double(g->maxflow()) << std::endl;
 	int node{ 0 };
 
 	for (auto it = outputMask.begin<uchar>(); it != outputMask.end<uchar>(); it++, node++) 
