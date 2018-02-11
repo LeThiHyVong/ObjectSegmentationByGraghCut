@@ -18,7 +18,7 @@ class GraphCutSegmentation
 
   public:
 	//! The enumeration type represent state of each pixel
-	enum PixelType
+	enum PixelType : char
 	{
 		BACKGROUND = -1,
 		UNKNOWN = 0,
@@ -96,9 +96,9 @@ class GraphCutSegmentation
 	//! Relational coordinate of 8-neighbor relationship
 	const std::vector<cv::Point> neighbor
 	{
-		{-1, -1},	{0, -1},	{1, -1},	
-		{-1,  0},	/*{0,0}*/	{1,  0},
-		{-1,  1},	{0,  1},	{1,  1}
+		/* {-1, -1},	{0, -1},	{1, -1},*/
+		/*{-1,  0},		{0,  0},*/	{1,  0},
+		/*{-1,  1},*/	{0,  1},	{1,  1}
 	};
 
 	// the flow
