@@ -214,7 +214,7 @@ void getObj(const std::string &fileName)
 	end = cv::getTickCount();
 	gc.cleanGarbage();
 	ofs << double(end - start) / cv::getTickFrequency() << '\n';
-
+	
 	cv::Mat obj;
 	original_img.copyTo(obj, outMask);
 	//cv::imshow("gcObj", obj);
